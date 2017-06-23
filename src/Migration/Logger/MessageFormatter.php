@@ -15,6 +15,11 @@ class MessageFormatter extends \Monolog\Formatter\LineFormatter implements \Mono
      */
     protected $format;
 
+    public function __construct()
+    {
+        parent::__construct(null, null, true);
+    }
+
     /**
      * {@inheritdoc}
      */
