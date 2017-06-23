@@ -514,16 +514,19 @@ class Version11410to2000 extends DatabaseStage implements StageInterface, Rollba
             $duplicates = [];
             foreach ($data as $row) {
                 $duplicates[] = sprintf(
-                    'Request path: %s Store ID: %s Target path: %s',
+                    'Request path: %s%sStore ID: %s%sTarget path: %s%s',
                     $row['request_path'],
+                    PHP_EOL,
                     $row['store_id'],
-                    $row['target_path']
+                    PHP_EOL,
+                    $row['target_path'],
+                    PHP_EOL
                 );
             }
 
             $message = sprintf(
                 'There are duplicates in URL rewrites:%s',
-                PHP_EOL . implode(PHP_EOL, $duplicates)
+                PHP_EOL . PHP_EOL . implode("\n", $duplicates)
             );
 
             if (!empty($this->configReader->getOption('auto_resolve_urlrewrite_duplicates'))) {
