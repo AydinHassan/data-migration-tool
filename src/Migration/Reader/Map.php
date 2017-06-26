@@ -88,8 +88,8 @@ class Map implements MapInterface
         $xml = file_get_contents($configFile);
         $document = new \Magento\Framework\Config\Dom($xml, $this->validationState);
 
-        if (!$document->validate($this->getRootDir() .'etc/' . self::CONFIGURATION_SCHEMA)) {
-            throw new Exception('XML file is invalid.');
+        if (!$document->validate($this->getRootDir() .'etc/' . self::CONFIGURATION_SCHEMA, $errors) ) {
+            throw new Exception("XML file is invalid. Errors: \n\n" . implode("\n", $errors));
         }
 
         $this->xml = new \DOMXPath($document->getDom());
